@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { Switch } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 //import * as React from "react";
 
@@ -9,6 +9,7 @@ import Next from "./Next";
 import { themes } from "../themes";
 import { STATE_FLOW, STATE_SECONDS, STATES_IDS, STATE_INFO } from "../const";
 import ThemeMode from "./ThemeMode";
+import ShowState from "./ShowState";
 
 const Timer = (props) => {
   const [startTimer, setStartTimer] = useState(false);
@@ -45,13 +46,13 @@ const Timer = (props) => {
   }, [time, startTimer]);
 
   useEffect(() => {
-    document.title = `${minutes}:${seconds}`;
+    document.title = `${minutes}:${seconds} ${state}`;
   
     if (time === 0) {
       handleSetState();
     }
   }, [time]);
-  
+
 
   return (
     <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} marginTop = {2}>
@@ -65,18 +66,15 @@ const Timer = (props) => {
         gap={"20px"}>
         <ThemeMode />
       </Box>
-      <Box
-        borderRadius={10}
-        textAlign="center"
-        margin="auto"
-        sx={{ p: 2, border: '2px dashed grey' }}>{state}</Box>
-      <Box fontSize={"256px"} >{minutes}:{seconds}</Box>
-      <Box
-        display={"flex"}
-        flexDirection={"row"}
-        justifyContent={"center"} 
-        gap={"20px"}
-      >
+      <Box borderRadius={10}  textAlign="center"  margin="auto"  sx={{ p: 2,border:'2px dashed primary' , borderColor:"primary.main", borderStyle:"dashed"}}>
+            <Typography><ShowState state={state}/>{state}</Typography>
+      </Box>
+      <Box fontSize={"256px"} flexDirection={"column"} justifyContent={"center"} >
+        <Typography  fontSize={"256px"}>
+          {minutes}:{seconds}
+        </Typography>
+      </Box>
+      <Box  display={"flex"}  flexDirection={"row"}  justifyContent={"center"}   gap={"20px"}>
         <Settings />
         <Play handleClick={handleStartTimer}/>
         <Next handleClick={handleSetState}/>
