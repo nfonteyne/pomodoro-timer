@@ -16,9 +16,17 @@ const Timer = (props) => {
   const [currentFlowIndex, setCurrentFlowIndex] = useState(0);
   const [state, setState] = useState(STATE_INFO[[STATES_IDS.focus]]);
 
-  const [time, setNewTime] = useState(STATE_SECONDS[STATE_FLOW[currentFlowIndex]]);
+  const [stateTimes, setStateTimes] = useState({
+    focus: STATE_SECONDS[[STATES_IDS.focus]],
+    shortBreak: STATE_SECONDS[[STATES_IDS.shortBreak]],
+    longBreak: STATE_SECONDS[[STATES_IDS.longBreak]]
+  });
+
+  const [time, setNewTime] = useState(stateTimes[STATE_FLOW[currentFlowIndex]]);
   const minutes = Math.floor(time / 60);
   const seconds = String(Math.floor(time % 60)).padStart(2, '0');
+
+
 
   const handleStartTimer = () => {
     setStartTimer(!startTimer)
@@ -32,7 +40,7 @@ const Timer = (props) => {
 
   useEffect(() => {
     setState(STATE_INFO[STATE_FLOW[currentFlowIndex]]);
-    setNewTime(STATE_SECONDS[STATE_FLOW[currentFlowIndex]]);
+    setNewTime(stateTimes[STATE_FLOW[currentFlowIndex]]);
     props.setCustomTheme(themes[STATE_FLOW[currentFlowIndex]]);
   }, [currentFlowIndex, props]);
 
@@ -75,7 +83,7 @@ const Timer = (props) => {
         </Typography>
       </Box>
       <Box  display={"flex"}  flexDirection={"row"}  justifyContent={"center"}   gap={"20px"}>
-        <Settings />
+        <Settings stateTimes={stateTimes} setStateTimes={setStateTimes}/>
         <Play handleClick={handleStartTimer}/>
         <Next handleClick={handleSetState}/>
       </Box>
