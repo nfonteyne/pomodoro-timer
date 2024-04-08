@@ -8,7 +8,6 @@ import Play from "./Play";
 import Next from "./Next";
 import { themes } from "../themes";
 import { STATE_FLOW, STATE_SECONDS, STATES_IDS, STATE_INFO } from "../const";
-import ThemeMode from "./ThemeMode";
 import ShowState from "./ShowState";
 
 const Timer = (props) => {
@@ -64,23 +63,24 @@ const Timer = (props) => {
 
   return (
     <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} marginTop = {2}>
-      <Box position="absolute" 
-        top={0} 
-        right={0} 
-        p={2} 
-        display={"flex"}
-        flexDirection={"row"}
-        justifyContent={"center"} 
-        gap={"20px"}>
-        <ThemeMode />
-      </Box>
-      <Box borderRadius={10}  textAlign="center"  margin="auto"  sx={{ p: 2,border:'2px dashed primary' , borderColor:"primary.main", borderStyle:"dashed"}}>
+      <Box borderRadius={10}  textAlign="center"  margin="auto"  sx={{ p: 2,border:'2' , borderColor:"primary.main", borderStyle:"dashed"}}>
             <Typography><ShowState state={state}/>{state}</Typography>
       </Box>
-      <Box fontSize={"256px"} flexDirection={"column"} justifyContent={"center"} >
-        <Typography  fontSize={"256px"}>
-          {minutes}:{seconds}
-        </Typography>
+      <Box
+        fontSize={{
+          xs: "64px",
+          sm: "128px",
+          md: "192px",
+          lg: "256px",
+          xl: "320px"
+        }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        textAlign="center"
+        mt={2}
+      >
+        <Typography fontSize="inherit">{minutes}:{seconds}</Typography>
       </Box>
       <Box  display={"flex"}  flexDirection={"row"}  justifyContent={"center"}   gap={"20px"}>
         <Settings stateTimes={stateTimes} setStateTimes={setStateTimes}/>
