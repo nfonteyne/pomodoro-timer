@@ -41,7 +41,7 @@ const Timer = (props) => {
     setState(STATE_INFO[STATE_FLOW[currentFlowIndex]]);
     setNewTime(stateTimes[STATE_FLOW[currentFlowIndex]]);
     props.setCustomTheme(themes[STATE_FLOW[currentFlowIndex]]);
-  }, [currentFlowIndex, props]);
+  }, [currentFlowIndex, props, stateTimes]);
 
   useEffect(() => {
     if (startTimer) {
