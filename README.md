@@ -11,4 +11,4 @@ npm install
 npm start
 ```
 
-![example](images\pomodoro-image.jpg)
+![example](.\images\pomodoro-image.jpg)
