@@ -58,7 +58,7 @@ const Timer = (props) => {
     if (time === 0) {
       handleSetState();
     }
-  }, [time]);
+  }, [time, minutes, seconds, state]);
 
 
   return (
