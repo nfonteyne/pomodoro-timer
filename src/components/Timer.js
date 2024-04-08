@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 //import * as React from "react";
 
 import Settings from "./Settings";
@@ -31,11 +31,11 @@ const Timer = (props) => {
     setStartTimer(!startTimer)
   };
 
-  const handleSetState = () => {
+  const handleSetState = useCallback(() => {
     setCurrentFlowIndex(
       currentFlowIndex === STATE_FLOW.length - 1 ? 0 : currentFlowIndex + 1
     );
-  };
+  }, [currentFlowIndex]);
 
   useEffect(() => {
     setState(STATE_INFO[STATE_FLOW[currentFlowIndex]]);
@@ -58,7 +58,7 @@ const Timer = (props) => {
     if (time === 0) {
       handleSetState();
     }
-  }, [time, minutes, seconds, state]);
+  }, [time, minutes, seconds, state, handleSetState]);
 
 
   return (
