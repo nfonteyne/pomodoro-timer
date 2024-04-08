@@ -11,4 +11,4 @@ npm install
 npm start
 ```
 
-![example](.\images\pomodoro-image.jpg)
+![example](https://github.com/nfonteyne/pomodoro-timer/blob/main/images/pomodoro-image.jpg)
