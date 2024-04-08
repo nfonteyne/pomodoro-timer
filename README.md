@@ -10,3 +10,5 @@ This project is a pomodoro Timer built with react and material UI.
 npm install
 npm start
 ```
+
+![example](images\pomodoro-image.jpg)
