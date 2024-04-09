@@ -1,34 +1,29 @@
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Typography, Container, Link } from "@mui/material";
 import { useState, useEffect, useCallback } from "react";
-//import * as React from "react";
-
 import Settings from "./Settings";
 import Play from "./Play";
 import Next from "./Next";
 import { themes } from "../themes";
 import { STATE_FLOW, STATE_SECONDS, STATES_IDS, STATE_INFO } from "../const";
 import ShowState from "./ShowState";
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const Timer = (props) => {
   const [startTimer, setStartTimer] = useState(false);
   const [currentFlowIndex, setCurrentFlowIndex] = useState(0);
-  const [state, setState] = useState(STATE_INFO[[STATES_IDS.focus]]);
-
+  const [state, setState] = useState(STATE_INFO[STATES_IDS.focus]);
   const [stateTimes, setStateTimes] = useState({
-    focus: STATE_SECONDS[[STATES_IDS.focus]],
-    shortBreak: STATE_SECONDS[[STATES_IDS.shortBreak]],
-    longBreak: STATE_SECONDS[[STATES_IDS.longBreak]]
+    focus: STATE_SECONDS[STATES_IDS.focus],
+    shortBreak: STATE_SECONDS[STATES_IDS.shortBreak],
+    longBreak: STATE_SECONDS[STATES_IDS.longBreak]
   });
-
   const [time, setNewTime] = useState(stateTimes[STATE_FLOW[currentFlowIndex]]);
   const minutes = Math.floor(time / 60);
   const seconds = String(Math.floor(time % 60)).padStart(2, '0');
 
-
-
   const handleStartTimer = () => {
-    setStartTimer(!startTimer)
+    setStartTimer(!startTimer);
   };
 
   const handleSetState = useCallback(() => {
@@ -60,15 +55,29 @@ const Timer = (props) => {
     }
   }, [time, minutes, seconds, state, handleSetState]);
 
-
   return (
-    <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} marginTop = {2}>
-      <Box borderRadius={10}  textAlign="center"  margin="auto"  sx={{ p: 2,border:'2' , borderColor:"primary.main", borderStyle:"dashed"}}>
-            <Typography><ShowState state={state}/>{state}</Typography>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="space-between"
+      minHeight="100vh"
+      
+    >
+      <Box
+        borderRadius={10}
+        textAlign="center"
+        margin="auto"
+        sx={{ p: 2, border: '2', borderColor: "primary.main", borderStyle: "dashed",  }}
+      >
+        <Typography>
+          <ShowState state={state} />
+          {state}
+        </Typography>
       </Box>
       <Box
         fontSize={{
-          xs: "64px",
+          xs: "100px",
           sm: "128px",
           md: "192px",
           lg: "256px",
@@ -78,14 +87,40 @@ const Timer = (props) => {
         justifyContent="center"
         alignItems="center"
         textAlign="center"
-        mt={2}
+
       >
         <Typography fontSize="inherit">{minutes}:{seconds}</Typography>
       </Box>
-      <Box  display={"flex"}  flexDirection={"row"}  justifyContent={"center"}   gap={"20px"}>
-        <Settings stateTimes={stateTimes} setStateTimes={setStateTimes}/>
-        <Play handleClick={handleStartTimer}/>
-        <Next handleClick={handleSetState}/>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="center"
+        margin="auto"
+        gap={"20px"}
+      >
+        <Settings stateTimes={stateTimes} setStateTimes={setStateTimes} />
+        <Play handleClick={handleStartTimer} />
+        <Next handleClick={handleSetState} />
+      </Box>
+      <Box
+        component="footer"
+        sx={{
+          py: 3,
+          px: 2,
+          width: "100%",
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[200]
+              : theme.palette.grey[800],
+              mt: 2
+        }}
+      >
+       
+        <Container maxWidth="sm">
+        <Link href="https://github.com/nfonteyne/pomodoro-timer" >
+          <GitHubIcon/>
+        </Link>
+        </Container>
       </Box>
     </Box>
   );
